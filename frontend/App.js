@@ -1,5 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+// Socket
+// import {ClientSocket} from './src/core/client-socket';
 
 export default class App extends React.Component {
   render() {
