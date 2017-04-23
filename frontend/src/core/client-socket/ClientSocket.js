@@ -30,7 +30,7 @@ class ClientSocket {
     set port(port) {
         this._port = port;
     }
-    
+
     onConnect = () => {
         try {
             this._socket = SocketIOClient(`${this._url}:${this._port}`);
