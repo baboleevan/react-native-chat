@@ -10,11 +10,6 @@ class ClientSocket {
         this._port = port;
         this._socket = null;
     }
-    /**
-     * 최대한 간결하게
-     * private 개념으로 유저가 함부로 접근 못하게
-     * js에서는 _를 private 약속
-     */
     get url() {
         return this._url;
     }
@@ -34,9 +29,10 @@ class ClientSocket {
     onConnect = () => {
         try {
             this._socket = SocketIOClient(`${this._url}:${this._port}`);
+            console.log('[TS_LOG] onConnect OK');
             return true;
         } catch (error) {
-            console.log('error');
+            console.log('[Socket] onConnect error');
             return false;
         }
     }
@@ -46,7 +42,14 @@ class ClientSocket {
      */
     onSend = (message = {}) => {
         // if socket == null return, false.
-        this._socket.emit('message', message);
+        try {
+            this._socket.emit('chat message', message);
+            console.log('[TS_LOG] message : ' + JSON.stringify(message));
+            return true;
+        } catch (error) {
+            console.log('[Socket] onSend error');
+            return false;
+        }
     }
 }
 

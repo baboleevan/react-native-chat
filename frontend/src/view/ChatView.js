@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import { GiftedChat } from 'react-native-gifted-chat';
+import { ClientSocket } from '../core/client-socket';
 
 export default class ChatView extends Component {
   constructor(props) {
     super(props);
     this.state = { messages: [] };
     this.onSend = this.onSend.bind(this);
+    this._socket = new ClientSocket();
+    this._socket.onConnect();
   }
   componentWillMount() {
     this.setState({
@@ -24,6 +27,8 @@ export default class ChatView extends Component {
     });
   }
   onSend(messages = []) {
+    this._socket.onSend(this.state.messages);
+    
     this.setState((previousState) => {
       return {
         messages: GiftedChat.append(previousState.messages, messages),
