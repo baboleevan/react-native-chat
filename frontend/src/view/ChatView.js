@@ -9,7 +9,11 @@ export default class ChatView extends Component {
     this._socket = new ClientSocket();
     this._socket.onConnect();
   }
+  // callback(text){
+  //   this.set()
+  // }
   componentWillMount() {
+    // this._socket.onReceive(callback);
     this.setState({
       messages: [
         {

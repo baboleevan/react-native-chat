@@ -54,7 +54,11 @@ class ClientSocket {
         }
     }
 
-    // onReceive
+    // onReceive(callback){
+    //     socket.on(asdf){
+    //         callback(text);
+    //     }
+    // }
     // TODO: return text when receive text from server
 }
 
