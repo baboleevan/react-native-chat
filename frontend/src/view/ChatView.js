@@ -6,7 +6,6 @@ export default class ChatView extends Component {
   constructor(props) {
     super(props);
     this.state = { messages: [] };
-    this.onSend = this.onSend.bind(this);
     this._socket = new ClientSocket();
     this._socket.onConnect();
   }
@@ -26,14 +25,15 @@ export default class ChatView extends Component {
       ],
     });
   }
-  onSend(messages = []) {
-    this._socket.onSend(this.state.messages);
+  onSend = (messages = []) => {
     
     this.setState((previousState) => {
       return {
         messages: GiftedChat.append(previousState.messages, messages),
       };
     });
+    this._socket.onSend("this.state.messages");
+    console.log('[TS_LOG] this.state.messages : ' + JSON.stringify(this.state.messages));
   }
   render() {
     return (

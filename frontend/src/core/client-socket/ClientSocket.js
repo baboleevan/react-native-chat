@@ -28,7 +28,7 @@ class ClientSocket {
 
     onConnect = () => {
         try {
-            this._socket = SocketIOClient(`${this._url}:${this._port}`);
+            this._socket = SocketIOClient(`http://${this._url}:${this._port}`);
             console.log('[TS_LOG] onConnect OK');
             return true;
         } catch (error) {
@@ -43,7 +43,9 @@ class ClientSocket {
     onSend = (message = {}) => {
         // if socket == null return, false.
         try {
-            this._socket.emit('chat message', message);
+            console.log("###########"+this._socket.emit('chat message', message, (data) => {
+                console.log('data'+data);
+            }));
             console.log('[TS_LOG] message : ' + JSON.stringify(message));
             return true;
         } catch (error) {
@@ -51,6 +53,9 @@ class ClientSocket {
             return false;
         }
     }
+
+    // onReceive
+    // TODO: return text when receive text from server
 }
 
 export default ClientSocket;
