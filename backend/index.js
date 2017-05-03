@@ -8,10 +8,14 @@ app.get('/', function(req, res){
 });
 
 io.on('connection', function(socket){
-  console.log('connection');
-  socket.on('chat message', function(msg){
-    console.log('message: ' + msg);
-  });
+  // TODO: Socket send message
+  io.emit('server message', 'Im server');
+  // console.log('connection');
+  // io.emit('connection message', 'Server : connection seccess');
+  // socket.on('chat message', function(msg){
+  //   console.log('message: ' + JSON.stringify(msg));
+  //   io.emit('chat message', msg);
+  // });
 });
 
 // io.on('connection', function(socket){

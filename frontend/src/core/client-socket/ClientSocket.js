@@ -53,6 +53,9 @@ class ClientSocket {
             return false;
         }
     }
+    onReceive = (action, callback) => {
+        this._socket.on(action, callback);
+    }
 
     // onReceive(callback){
     //     socket.on(asdf){
