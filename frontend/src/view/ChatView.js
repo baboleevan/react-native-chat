@@ -8,15 +8,20 @@ export default class ChatView extends Component {
     this.state = { messages: [] };
     this._socket = new ClientSocket();
     this._socket.onConnect();
-    this._socket.onReceive('chat message', (data) => {
+    this._socket.onReceive('chat message', this.handleReceive);
+  }
+  
+  handleReceive = (data) => {
+    (data) => {
       console.log('[TS_LOG] Receive data : ' + data);
       this.setState((previousState) => {
         return {
           messages: GiftedChat.append(previousState.messages, data),
         };
       });
-    });
+    }
   }
+
   componentWillMount() {
     this.setState({
       messages: [
