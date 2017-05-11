@@ -26,7 +26,7 @@ export default class ChatView extends Component {
     });
 
     this._socket.onReceive('chat message', (data) => {
-      console.log(`[KangLOG] data log ${data}`);
+      console.warn(`[KangLOG] data log ${data}`);
       this.setState((previousState) => {
         return {
           messages: GiftedChat.append(previousState.messages, data),
@@ -41,7 +41,7 @@ export default class ChatView extends Component {
         messages: GiftedChat.append(previousState.messages, messages),
       };
     });
-    this._socket.onSend('chat message', this.state.messages, null);
+    this._socket.onSend('chat message', messages, null);
     // How to use onReceive Method????
   }
   render() {
