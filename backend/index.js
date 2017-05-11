@@ -8,8 +8,9 @@ app.get('/', function(req, res){
 });
 
 io.on('connection', function(socket){
+  console.log('[TS_LOG] Server Start');
   // TODO: Socket send message
-  io.emit('server message', 'Im server');
+  socket.broadcast.emit('server message', 'Im server');
   // console.log('connection');
   // io.emit('connection message', 'Server : connection seccess');
   // socket.on('chat message', function(msg){
