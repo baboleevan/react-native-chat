@@ -10,13 +10,14 @@ app.get('/', function(req, res){
 io.on('connection', function(socket){
   console.log('[TS_LOG] Server Start');
   // TODO: Socket send message
-  socket.broadcast.emit('server message', 'Im server');
+  // socket.broadcast.emit('server message', 'Im server');
   // console.log('connection');
   // io.emit('connection message', 'Server : connection seccess');
-  // socket.on('chat message', function(msg){
-  //   console.log('message: ' + JSON.stringify(msg));
-  //   io.emit('chat message', msg);
-  // });
+  socket.on('chat message', function(msg){
+    console.log('message: ' + JSON.stringify(msg));
+    // socket.broadcast.emit('server message', 'Im server');
+    socket.broadcast.emit('chat message', msg);
+  });
 });
 
 // io.on('connection', function(socket){

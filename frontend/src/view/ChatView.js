@@ -8,8 +8,13 @@ export default class ChatView extends Component {
     this.state = { messages: [] };
     this._socket = new ClientSocket();
     this._socket.onConnect();
-    this._socket.onReceive('server message', (data) => {
+    this._socket.onReceive('chat message', (data) => {
       console.log('[TS_LOG] Receive data : ' + data);
+      this.setState((previousState) => {
+        return {
+          messages: GiftedChat.append(previousState.messages, data),
+        };
+      });
     });
   }
   componentWillMount() {
@@ -29,13 +34,14 @@ export default class ChatView extends Component {
     });
   }
   onSend = (messages = []) => {
+    console.log('[#####] messages : ' + JSON.stringify(messages));
     
     this.setState((previousState) => {
       return {
         messages: GiftedChat.append(previousState.messages, messages),
       };
     });
-    this._socket.onSend('chat message', this.state.messages, null);
+    this._socket.onSend('chat message', messages, null);
     // How to use onReceive Method????
     
   }
