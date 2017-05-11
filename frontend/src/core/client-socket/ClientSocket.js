@@ -40,13 +40,11 @@ class ClientSocket {
     /**
      * try, return true, false
      */
-    onSend = (message = {}) => {
+    onSend = (eventName, message = {}, callback) => {
         // if socket == null return, false.
         try {
-            console.log("###########"+this._socket.emit('chat message', message, (data) => {
-                console.log('data'+data);
-            }));
-            console.log('[TS_LOG] message : ' + JSON.stringify(message));
+            this._socket.emit(eventName, message, callback);
+            // console.log('[TS_LOG] message : ' + JSON.stringify(message));
             return true;
         } catch (error) {
             console.log('[Socket] onSend error');

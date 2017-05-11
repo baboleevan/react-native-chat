@@ -35,7 +35,7 @@ export default class ChatView extends Component {
         messages: GiftedChat.append(previousState.messages, messages),
       };
     });
-    this._socket.onSend(this.state.messages);
+    this._socket.onSend('chat message', this.state.messages, null);
     // How to use onReceive Method????
     
   }
