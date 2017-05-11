@@ -8,6 +8,7 @@ export default class ChatView extends Component {
     this.state = { messages: [] };
     this._socket = new ClientSocket();
     this._socket.onConnect();
+
     // this._socket.on('chat message', (msg) => {
     //   console.log('[TS_LOG] Client msg : ' + msg);
     // });
@@ -34,20 +35,26 @@ export default class ChatView extends Component {
         },
       ],
     });
+
+    this._socket.onReceive('chat message', (data) => {
+      console.log(`[KangLOG] data log ${data}`);
+      this.setState((previousState) => {
+        return {
+          messages: GiftedChat.append(previousState.messages, data),
+        };
+      });
+    });
   }
   onSend = (messages = []) => {
-    
+
     this.setState((previousState) => {
       return {
         messages: GiftedChat.append(previousState.messages, messages),
       };
     });
+
     this._socket.onSend(this.state.messages);
-    console.log('[TS_LOG] this.state.messages : ' + JSON.stringify(this.state.messages));
-    // How to use onReceive Method????
-    this._socket.onReceive('server message', (data) => {
-      console.log('[TS_LOG] Receive data : ' + data);
-    });
+
   }
   render() {
     return (
