@@ -5,7 +5,7 @@ import SocketIOClient from 'socket.io-client';
  * socket.url;
  */
 class ClientSocket {
-    constructor(url = "localhost", port = 3000) {
+    constructor(url = "192.168.0.180", port = 3000) {
         this._url = url;
         this._port = port;
         this._socket = null;

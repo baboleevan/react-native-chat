@@ -32,10 +32,9 @@ export default class ChatView extends Component {
         },
       ],
     });
+
   }
   onSend = (messages = []) => {
-    console.log('[#####] messages : ' + JSON.stringify(messages));
-    
     this.setState((previousState) => {
       return {
         messages: GiftedChat.append(previousState.messages, messages),
@@ -43,7 +42,6 @@ export default class ChatView extends Component {
     });
     this._socket.onSend('chat message', messages, null);
     // How to use onReceive Method????
-    
   }
   render() {
     return (
